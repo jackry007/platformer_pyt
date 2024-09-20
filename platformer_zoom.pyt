@@ -68,6 +68,9 @@ pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Platformer with Zoom")
 
+font = pygame.font.Font(None, 36)  # None uses the default system font, size 36
+
+
 all_sprite_list = pygame.sprite.Group()
 wall_list = pygame.sprite.Group()
 
@@ -179,10 +182,15 @@ while running:
         )
         screen.blit(scaled_image, sprite_rect.topleft)
 
+    # Display FPS
+    fps = clock.get_fps()  # Get the current FPS
+    fps_text = font.render(f"FPS: {int(fps)}", True, WHITE)  # Render the FPS as text
+    screen.blit(fps_text, (10, 10))  # Draw the FPS at the top left corner
+
     # Flip the screen
     pygame.display.flip()
 
-    # Limit to 60 FPS
-    clock.tick(60)
+    # Limit to 120 FPS
+    clock.tick(120)
 
 pygame.quit()
